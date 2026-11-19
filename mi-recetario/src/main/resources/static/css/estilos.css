@@ -1,0 +1,64 @@
+/* Estilos generales de Mi Recetario */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+}
+
+/* Barra de navegación */
+
+.navbar {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.10);
+}
+
+/* Títulos */
+
+h1, h2 {
+    font-weight: 700;
+}
+
+/* Tarjetas */
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.card-header {
+    border-radius: 12px 12px 0 0 !important;
+}
+
+/* Botones */
+
+.btn {
+    border-radius: 7px;
+}
+
+/* Tablas */
+
+.table {
+    vertical-align: middle;
+}
+
+.table thead th {
+    white-space: nowrap;
+}
+
+/* Formularios */
+
+.form-control,
+.form-select {
+    border-radius: 7px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.15);
+}
+
+/* Pie de página */
+
+footer {
+    font-size: 0.9rem;
+}

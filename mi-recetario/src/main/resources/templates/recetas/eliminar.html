@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eliminar receta - Mi Recetario</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-success">
+    <div class="container">
+        <a class="navbar-brand fw-bold" th:href="@{/}">
+            Mi Recetario
+        </a>
+    </div>
+</nav>
+
+<main class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+
+            <div class="card shadow-sm border-danger">
+
+                <div class="card-header bg-danger text-white">
+                    <h1 class="h4 mb-0">Eliminar receta</h1>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <p class="fs-5">
+                        ¿Estás seguro de que deseas eliminar esta receta?
+                    </p>
+
+                    <div class="alert alert-warning">
+                        <strong th:text="${receta.nombre}"></strong>
+                        <p class="mb-0 mt-2">
+                            Esta operación también eliminará todos los pasos
+                            asociados a esta receta.
+                        </p>
+                    </div>
+
+                    <form th:action="@{/recetas/eliminar/{id}(id=${receta.id})}"
+                          method="post">
+
+                        <button type="submit" class="btn btn-danger">
+                            Sí, eliminar receta
+                        </button>
+
+                        <a th:href="@{/recetas}"
+                           class="btn btn-outline-secondary">
+                            Cancelar
+                        </a>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

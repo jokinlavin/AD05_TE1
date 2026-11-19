@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulario de receta - Mi Recetario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-dark bg-success">
+    <div class="container">
+        <a class="navbar-brand fw-bold" th:href="@{/}">
+            Mi Recetario
+        </a>
+    </div>
+</nav>
+
+<main class="container py-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h1 class="h4 mb-0"
+                        th:text="${receta.id == null ? 'Nueva receta' : 'Editar receta'}">
+                        Nueva receta
+                    </h1>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form th:action="@{/recetas/guardar}"
+                          th:object="${receta}"
+                          method="post">
+
+                        <input type="hidden" th:field="*{id}">
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">
+                                Nombre de la receta *
+                            </label>
+                            <input type="text"
+                                   id="nombre"
+                                   th:field="*{nombre}"
+                                   class="form-control"
+                                   th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''"
+                                   placeholder="Ej. Tortilla de patatas"
+                                   maxlength="100"
+                                   required>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('nombre')}"
+                                 th:errors="*{nombre}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">
+                                Descripción
+                            </label>
+                            <textarea id="descripcion"
+                                      th:field="*{descripcion}"
+                                      class="form-control"
+                                      rows="3"
+                                      maxlength="1000"
+                                      placeholder="Describe brevemente la receta">
+                            </textarea>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('descripcion')}"
+                                 th:errors="*{descripcion}">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="tipoCocina" class="form-label">
+                                Tipo de cocina *
+                            </label>
+                            <input type="text"
+                                   id="tipoCocina"
+                                   th:field="*{tipoCocina}"
+                                   class="form-control"
+                                   th:classappend="${#fields.hasErrors('tipoCocina')} ? 'is-invalid' : ''"
+                                   placeholder="Ej. Mediterránea"
+                                   maxlength="50"
+                                   required>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('tipoCocina')}"
+                                 th:errors="*{tipoCocina}">
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="tiempoPreparacion" class="form-label">
+                                Tiempo de preparación (minutos) *
+                            </label>
+                            <input type="number"
+                                   id="tiempoPreparacion"
+                                   th:field="*{tiempoPreparacion}"
+                                   class="form-control"
+                                   th:classappend="${#fields.hasErrors('tiempoPreparacion')} ? 'is-invalid' : ''"
+                                   min="1"
+                                   required>
+                            <div class="invalid-feedback"
+                                 th:if="${#fields.hasErrors('tiempoPreparacion')}"
+                                 th:errors="*{tiempoPreparacion}">
+                            </div>
+                        </div>
+
+                        <p class="text-secondary small">
+                            * Campos obligatorios.
+                        </p>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                Guardar receta
+                            </button>
+
+                            <a th:href="@{/recetas}"
+                               class="btn btn-outline-secondary">
+                                Cancelar
+                            </a>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
