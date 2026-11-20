@@ -20,21 +20,20 @@ public class PasoController {
 	private final PasoService pasoService;
 	private final RecetaService recetaService;
 
-	// Inyección de dependencias por constructor
-	public PasoController(PasoService pasoService,
-			RecetaService recetaService) {
+	// Dependencias por constructor
+	public PasoController(PasoService pasoService, RecetaService recetaService) {
 		this.pasoService = pasoService;
 		this.recetaService = recetaService;
 	}
 
-	// Mostrar todos los pasos
+	// Mostramos todos los pasos
 	@GetMapping("/pasos")
 	public String listar(Model model) {
 		model.addAttribute("pasos", pasoService.listarTodos());
 		return "pasos/lista";
 	}
 
-	// Mostrar formulario para crear un paso
+	// Mostramos el formulario para crear un paso
 	@GetMapping("/pasos/nuevo")
 	public String nuevo(Model model) {
 		model.addAttribute("paso", new Paso());
@@ -42,7 +41,7 @@ public class PasoController {
 		return "pasos/formulario";
 	}
 
-	// Guardar un paso nuevo o modificado
+	// Guardamos un paso nuevo o modificado
 	@PostMapping("/pasos/guardar")
 	public String guardar(
 			@Valid @ModelAttribute("paso") Paso paso,
@@ -72,7 +71,7 @@ public class PasoController {
 	}
 
 
-	// Mostrar formulario para editar un paso
+	// Mostramos el formulario para editar un paso
 	@GetMapping("/pasos/editar/{id}")
 	public String editar(@PathVariable Long id, Model model) {
 
@@ -86,7 +85,7 @@ public class PasoController {
 		return "pasos/formulario";
 	}
 
-	// Mostrar confirmación antes de eliminar
+	// Pedimos confirmación antes de eliminar
 	@GetMapping("/pasos/eliminar/{id}")
 	public String confirmarEliminar(@PathVariable Long id, Model model) {
 
@@ -99,14 +98,14 @@ public class PasoController {
 		return "pasos/eliminar";
 	}
 
-	// Eliminar paso mediante POST
+	// Eliminamos el paso mediante POST
 	@PostMapping("/pasos/eliminar/{id}")
 	public String eliminar(@PathVariable Long id) {
 		pasoService.eliminar(id);
 		return "redirect:/pasos";
 	}
 
-	// Cargar recetas disponibles para el selector
+	// Cargamos las recetas disponibles para el desplegable
 	private void cargarRecetas(Model model) {
 		model.addAttribute("recetas", recetaService.listarTodas());
 	}

@@ -18,26 +18,26 @@ public class RecetaController {
 
 	private final RecetaService recetaService;
 
-	// Inyección de dependencias por constructor
+	// Dependencias por constructor
 	public RecetaController(RecetaService recetaService) {
 		this.recetaService = recetaService;
 	}
 
-	// Mostrar todas las recetas
+	// Mostramos todas las recetas
 	@GetMapping("/recetas")
 	public String listar(Model model) {
 		model.addAttribute("recetas", recetaService.listarTodas());
 		return "recetas/lista";
 	}
 
-	// Mostrar formulario para crear una receta
+	// Mostramos el  formulario para crear una receta
 	@GetMapping("/recetas/nueva")
 	public String nueva(Model model) {
 		model.addAttribute("receta", new Receta());
 		return "recetas/formulario";
 	}
 
-	// Guardar una receta nueva o modificada
+	// Guardamos una receta nueva o modificada
 	@PostMapping("/recetas/guardar")
 	public String guardar(
 			@Valid @ModelAttribute("receta") Receta receta,
@@ -68,9 +68,7 @@ public class RecetaController {
 		return "redirect:/recetas";
 	}
 
-
-
-	// Mostrar formulario para editar una receta
+	// Mostramos el formulario para editar una receta
 	@GetMapping("/recetas/editar/{id}")
     public String editar(@PathVariable Long id, Model model) {
 
@@ -83,7 +81,7 @@ public class RecetaController {
         return "recetas/formulario";
     }
 
-	// Mostrar confirmación antes de eliminar
+	// Pedimos confirmación antes de eliminar
 	@GetMapping("/recetas/eliminar/{id}")
 	public String confirmarEliminar(@PathVariable Long id, Model model) {
 
@@ -95,7 +93,7 @@ public class RecetaController {
 		return "recetas/eliminar";
 	}
 
-	// Eliminar receta mediante POST
+	// Eliminamos ls receta mediante POST
 	@PostMapping("/recetas/eliminar/{id}")
 	public String eliminar(@PathVariable Long id) {
 		recetaService.eliminar(id);
