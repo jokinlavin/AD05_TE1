@@ -17,32 +17,32 @@ public class PasoService {
 	private final PasoRepository pasoRepository;
 	private final RecetaRepository recetaRepository;
 
-	// Inyección de dependencias por constructor
+	// Dependencias por constructor
 	public PasoService(PasoRepository pasoRepository,
 			RecetaRepository recetaRepository) {
 		this.pasoRepository = pasoRepository;
 		this.recetaRepository = recetaRepository;
 	}
 
-	// Obtener todos los pasos
+	// Obtenemos todos los pasos
 	@Transactional(readOnly = true)
 	public List<Paso> listarTodos() {
 		return pasoRepository.findAllByOrderByRecetaIdAscNumeroPasoAsc();
 	}
 
-	// Buscar un paso por su identificador
+	// Buscamos un paso por su identificador
 	@Transactional(readOnly = true)
 	public Paso buscarPorId(Long id) {
 		return pasoRepository.findWithRecetaById(id);
 	}
 
-	// Obtener los pasos de una receta concreta
+	// Obtenemos los pasos de una receta concreta
 	@Transactional(readOnly = true)
 	public List<Paso> listarPorReceta(Long recetaId) {
 		return pasoRepository.findByRecetaId(recetaId);
 	}
 
-	// Guardar un paso
+	// Guardamos un paso
 	public Paso guardar(Paso paso) {
 		if (paso.getReceta() == null ||
 				paso.getReceta().getId() == null) {
@@ -60,7 +60,7 @@ public class PasoService {
 		return pasoRepository.save(paso);
 	}
 
-	// Eliminar un paso por su identificador
+	// Eliminamos un paso por su identificador
 	public void eliminar(Long id) {
 		pasoRepository.deleteById(id);
 	}
